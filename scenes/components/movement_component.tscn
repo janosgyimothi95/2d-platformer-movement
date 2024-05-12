@@ -4,3 +4,5 @@
 
 [node name="MovementComponent" type="Node"]
 script = ExtResource("1_h1imb")
+gound_accel_speed = 10.0
+ground_decel_speed = 15.0

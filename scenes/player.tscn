@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://2b8d3tws7i0"]
+[gd_scene load_steps=31 format=3 uid="uid://2b8d3tws7i0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_4yhg2"]
 [ext_resource type="Texture2D" uid="uid://bvvef6dlvomrb" path="res://assets/joined_base_model_Sheet.png" id="1_hhtff"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://nttbicoh1je" path="res://scenes/components/input_component.tscn" id="4_rjwa0"]
 [ext_resource type="PackedScene" uid="uid://ca7plar18sfyx" path="res://scenes/components/movement_component.tscn" id="5_1rivu"]
 [ext_resource type="PackedScene" uid="uid://dys7wgvw4tkxr" path="res://scenes/components/animation_component.tscn" id="6_tf84p"]
-[ext_resource type="PackedScene" uid="uid://b73u75ejg87lo" path="res://scenes/components/jump_component.tscn" id="7_ljbxu"]
+[ext_resource type="PackedScene" uid="uid://cp28g4jlbiq3t" path="res://scenes/components/advenced_jump_component.tscn" id="7_jq70n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpd13"]
 atlas = ExtResource("1_hhtff")
@@ -55,6 +55,10 @@ region = Rect2(288, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5qove"]
 atlas = ExtResource("1_hhtff")
 region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfr23"]
+atlas = ExtResource("1_hhtff")
+region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jjjw8"]
 atlas = ExtResource("1_hhtff")
@@ -143,6 +147,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gfr23")
+}],
+"loop": true,
+"name": &"jump_peak",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jjjw8")
 }, {
 "duration": 1.0,
@@ -168,7 +180,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 12.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bqgfy"]
@@ -181,13 +193,15 @@ animation_component = NodePath("AnimationComponent")
 input_component = NodePath("InputComponent")
 gravity_component = NodePath("GravityComponent")
 movement_component = NodePath("MovementComponent")
-jump_component = NodePath("JumpComponent")
+jump_component = NodePath("AdvencedJumpComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -2)
+position = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_m7r54")
-animation = &"fall"
+animation = &"idle"
 autoplay = "idle"
+frame = 8
+frame_progress = 0.674889
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bqgfy")
@@ -202,4 +216,5 @@ speed = 200.0
 [node name="AnimationComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_tf84p")]
 sprite = NodePath("../AnimatedSprite2D")
 
-[node name="JumpComponent" parent="." instance=ExtResource("7_ljbxu")]
+[node name="AdvencedJumpComponent" parent="." instance=ExtResource("7_jq70n")]
+jump_velocity = -500.0

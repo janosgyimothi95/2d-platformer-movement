@@ -1,16 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhh8ppndbokmi"]
+[gd_scene load_steps=4 format=3 uid="uid://dhh8ppndbokmi"]
 
 [ext_resource type="PackedScene" uid="uid://2b8d3tws7i0" path="res://scenes/player.tscn" id="1_grkdv"]
+[ext_resource type="PackedScene" uid="uid://btbljh4wlocsl" path="res://scenes/wall.tscn" id="2_hx20g"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ljk6q"]
 
 [node name="main" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(133, 182)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("WorldBoundaryShape2D_ljk6q")
-
 [node name="Player" parent="." instance=ExtResource("1_grkdv")]
 position = Vector2(102, 162)
+
+[node name="walls" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="walls"]
+position = Vector2(133, 182)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_ljk6q")
+
+[node name="StaticBody2D2" parent="walls" instance=ExtResource("2_hx20g")]
+position = Vector2(221, 129)
+scale = Vector2(3.49559, 0.298761)
+
+[node name="StaticBody2D3" parent="walls" instance=ExtResource("2_hx20g")]
+position = Vector2(84, 71)
+scale = Vector2(3.49559, 0.298761)
